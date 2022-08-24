@@ -15,10 +15,18 @@ const InsuranceSchema = new Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+    },
+    addedBy: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = InsuranceSchema = mongoose.model("Insurance", InsuranceSchema);
+module.exports = Insurance = mongoose.model("Insurance", InsuranceSchema);
