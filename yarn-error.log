@@ -1,0 +1,45 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Jezzel\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add express mongooose
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Anaconda3;C:\ProgramData\Anaconda3\Library\mingw-w64\bin;C:\ProgramData\Anaconda3\Library\usr\bin;C:\ProgramData\Anaconda3\Library\bin;C:\ProgramData\Anaconda3\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\GitHub CLI\;C:\Program Files\Git\cmd;C:\Program Files\MATLAB\R2021b\bin;C:\xampp\php;C:\Program Files\PuTTY\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;E:\KWP\DataCollector\driver\geckodriver.exe;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\OpenJDK\openjdk-11.0.15_10\bin;C:\flutter\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Jezzel\AppData\Local\Microsoft\WindowsApps;C:\Users\Jezzel\AppData\Local\Programs\Microsoft VS Code\bin;C:\mingw_dev_lib\mingw\mingw64\bin;C:\Users\Jezzel\AppData\Roaming\Composer\vendor\bin;E:\KWP\DataCollector\driver\geckodriver.exe;C:\Users\Jezzel\AppData\Roaming\netlify\Config\helper\bin;C:\Users\Jezzel\.netlify\helper\bin;C:\Users\Jezzel\AppData\Roaming\npm;C:\Users\Jezzel\AppData\Local\Android\Sdk\emulator;C:\Users\Jezzel\AppData\Local\Android\Sdk\platform-tools;C:\Users\Jezzel\AppData\Local\Microsoft\WindowsApps;C:\flutter\bin;
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.15.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/mongooose: Not found
+      at Request.params.callback [as _callback] (C:\Users\Jezzel\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
+      at Request.self.callback (C:\Users\Jezzel\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
+      at Request.emit (node:events:527:28)
+      at Request.<anonymous> (C:\Users\Jezzel\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141855:10)
+      at Request.emit (node:events:527:28)
+      at IncomingMessage.<anonymous> (C:\Users\Jezzel\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141777:12)
+      at Object.onceWrapper (node:events:641:28)
+      at IncomingMessage.emit (node:events:539:35)
+      at endReadableNT (node:internal/streams/readable:1345:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "All-Insurances-MERN",
+    "version": "1.0.0",
+    "description": "All types of Insurance places at one place developed on MERN",
+    "main": "index.js",
+    "repository": "git@github.com:Jazzel/All-Insurances-MERN.git",
+    "author": "Muhammad Jazzel Mehmood <jazzelmehmood4@gmail.com>",
+    "license": "MIT",
+    "private": false
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
