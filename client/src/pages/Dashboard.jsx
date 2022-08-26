@@ -55,7 +55,19 @@ const Dashboard = () => {
                     >
                       Update
                     </button>{" "}
-                    | <button className="btn btn-danger">Delete</button>
+                    |{" "}
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => {
+                        if (
+                          window.confirm("Are you sure you want to delete?")
+                        ) {
+                          alert("Insurance removed !");
+                        }
+                      }}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

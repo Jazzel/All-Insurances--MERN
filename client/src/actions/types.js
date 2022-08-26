@@ -23,3 +23,9 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_POST = "ADD_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
+
+export const GET_INSURANCES = "GET_INSURANCES";
+export const GET_INSURANCE = "GET_INSURANCE";
+export const DELETE_INSURANCE = "DELETE_INSURANCE";
+export const ADD_INSURANCE = "ADD_INSURANCE";
+export const UPDATE_INSURANCE = "UPDATE_INSURANCE";
