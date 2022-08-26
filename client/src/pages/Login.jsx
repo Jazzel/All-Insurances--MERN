@@ -1,16 +1,22 @@
+import { connect } from "react-redux";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { login } from "../actions/auth";
+import PropTypes from "prop-types";
 
-const Login = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const navigate = useNavigate();
+const Login = ({ login, isAuthenticated }) => {
+  const [email, setEmail] = React.useState("jazzelmehmood4@gmail.com");
+  const [password, setPassword] = React.useState("Mpower1234");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    navigate("/dashboard");
+    login(email, password);
   };
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
   return (
     <div className="row" style={{ height: "100vh", overflow: "none" }}>
       <div
@@ -75,4 +81,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

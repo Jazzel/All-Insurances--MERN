@@ -17,13 +17,17 @@ import store from "./store";
 import { Provider } from "react-redux";
 import { loadUser } from "./actions/auth";
 import PrivateRoute from "./routing/PrivateRoute";
+import UpdateInsurance from "./pages/UpdateInsurance";
+import AddInsurance from "./pages/AddInsurance";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadUser());
+    if (localStorage.token) {
+      store.dispatch(loadUser());
+    }
   }, []);
 
   return (
@@ -41,6 +45,22 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="dashboard/add-insurance"
+              element={
+                <PrivateRoute>
+                  <AddInsurance />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="dashboard/update-insurance/:id"
+              element={
+                <PrivateRoute>
+                  <UpdateInsurance />
                 </PrivateRoute>
               }
             />
