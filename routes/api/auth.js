@@ -16,10 +16,10 @@ const User = require("../../models/User");
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
-    res.json(user);
+    return res.json(user);
   } catch (err) {
     console.log(err.message);
-    res.status(500).send("Server error");
+    return res.status(500).send("Server error");
   }
 });
 
@@ -45,12 +45,16 @@ router.post(
       let user = await User.findOne({ email });
 
       if (!user)
-        res.status(400).json({ errors: [{ msg: "Invalid credentials" }] });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid credentials" }] });
 
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch)
-        res.status(400).json({ errors: [{ msg: "Invalid credentials" }] });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid credentials" }] });
 
       // Return JWT
       const payload = {
@@ -61,11 +65,11 @@ router.post(
 
       jwt.sign(payload, secretToken, { expiresIn: 360000 }, (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        return res.json({ token });
       });
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server error");
+      return res.status(500).send("Server error");
     }
   }
 );

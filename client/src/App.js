@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import {
   BrowserRouter as Router,
   Navigate,
   Route,
   Routes,
+  useLocation,
 } from "react-router-dom";
-import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
@@ -19,10 +19,97 @@ import { loadUser } from "./actions/auth";
 import PrivateRoute from "./routing/PrivateRoute";
 import UpdateInsurance from "./pages/UpdateInsurance";
 import AddInsurance from "./pages/AddInsurance";
+import Insurance from "./pages/Insurance";
+import InsuranceList from "./pages/InsuranceList";
+import InsuranceDetails from "./pages/InsuranceDetails";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
+
+export const getInsuranceName = (type) => {
+  return type === "health"
+    ? "Health Insurance"
+    : type === "life"
+    ? "Life Insurance"
+    : type === "car"
+    ? "Car Insurance"
+    : type === "term"
+    ? "Term Insurance"
+    : type === "credit"
+    ? "Credit Cards"
+    : type === "car-"
+    ? "Car Loans"
+    : type === "personal"
+    ? "Personal Loans"
+    : type === "home"
+    ? "Home Loans"
+    : type === "debt"
+    ? "Debt Restructing"
+    : type;
+};
+
+export const insuranceTypes = [
+  {
+    name: "Car Insurance",
+    image: require("./assets/car.png"),
+    value: "car",
+  },
+  {
+    name: "Life Insurance",
+    image: require("./assets/heart.png"),
+    value: "life",
+  },
+  {
+    name: "Health Insurance",
+    image: require("./assets/health.png"),
+    value: "health",
+  },
+  {
+    name: "Term Life",
+    image: require("./assets/life.png"),
+    value: "term",
+  },
+  {
+    name: "Credit Cards",
+    image: require("./assets/credit.png"),
+    value: "credit",
+  },
+  {
+    name: "Car Loans",
+    image: require("./assets/car-.png"),
+    value: "car-",
+  },
+  {
+    name: "Personal Loans",
+    image: require("./assets/loan.png"),
+    value: "personal",
+  },
+  {
+    name: "Bank Accounts",
+    image: require("./assets/bank.png"),
+    value: "bank",
+  },
+  {
+    name: "Home Loans",
+    image: require("./assets/home.png"),
+    value: "home",
+  },
+  {
+    name: "Debt Restructing",
+    image: require("./assets/debt.png"),
+    value: "debt",
+  },
+];
+
+const Wrapper = ({ children }) => {
+  const location = useLocation();
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+  return children;
+};
+
 const App = () => {
   useEffect(() => {
     if (localStorage.token) {
@@ -33,40 +120,47 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Routes>
-          <Route path="/*">
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route
-              path="dashboard"
-              element={
-                <PrivateRoute>
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="dashboard/add-insurance"
-              element={
-                <PrivateRoute>
-                  <AddInsurance />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="dashboard/update-insurance/:id"
-              element={
-                <PrivateRoute>
-                  <UpdateInsurance />
-                </PrivateRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Route>
-        </Routes>
+        <Wrapper>
+          <Routes>
+            <Route path="/*">
+              <Route index element={<Home />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="insurances" element={<Insurance />} />
+              <Route path="insurances/:type" element={<InsuranceList />} />
+              <Route
+                path="insurance-details/:id"
+                element={<InsuranceDetails />}
+              />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route
+                path="dashboard"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="dashboard/add-insurance"
+                element={
+                  <PrivateRoute>
+                    <AddInsurance />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="dashboard/update-insurance/:id"
+                element={
+                  <PrivateRoute>
+                    <UpdateInsurance />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
+          </Routes>
+        </Wrapper>
       </Router>
     </Provider>
   );

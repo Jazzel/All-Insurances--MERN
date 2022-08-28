@@ -3,10 +3,11 @@ import React from "react";
 import { Link, Navigate } from "react-router-dom";
 import { login } from "../actions/auth";
 import PropTypes from "prop-types";
+import Alert from "../Components/Alert";
 
 const Login = ({ login, isAuthenticated }) => {
-  const [email, setEmail] = React.useState("jazzelmehmood4@gmail.com");
-  const [password, setPassword] = React.useState("Mpower1234");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,13 +19,21 @@ const Login = ({ login, isAuthenticated }) => {
     return <Navigate to="/dashboard" />;
   }
   return (
-    <div className="row" style={{ height: "100vh", overflow: "none" }}>
+    <div
+      className="row"
+      style={{
+        height: "95vh",
+      }}
+    >
       <div
-        className="col-sm-12 col-lg-6 shadow"
-        style={{ overflow: "none" }}
+        className="col-12 col-lg-6 shadow"
+        style={{
+          background: `url(${require("./../assets/back2.jpg")})`,
+          backgroundSize: "cover",
+        }}
       ></div>
       <div
-        className="col-sm-12 col-lg-6"
+        className="col-12 col-lg-6"
         style={{
           justifyContent: "center",
           alignItems: "center",
@@ -32,13 +41,19 @@ const Login = ({ login, isAuthenticated }) => {
           flexDirection: "column",
         }}
       >
-        <h1>Login</h1>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h1
+            className="text-dark"
+            style={{ fontSize: "60px", transform: "rotate(-5deg)" }}
+          >
+            Insurances
+          </h1>
+        </Link>
         <br />
-        <form
-          className="form"
-          onSubmit={handleSubmit}
-          style={{ width: "50%", overflow: "hidden" }}
-        >
+        <h2>Login</h2>
+        <br />
+        <Alert style={{ width: "50%" }} />
+        <form className="form" onSubmit={handleSubmit} style={{ width: "50%" }}>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">
               @

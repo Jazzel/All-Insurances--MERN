@@ -1,18 +1,32 @@
-import React from "react";
+import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getInsurances, deleteInsurance } from "../actions/insurance";
 import DashboardHeader from "../Components/DashboardHeader";
 import Footer from "../Components/Footer";
+import PropTypes from "prop-types";
+import { getInsuranceName } from "../App";
 
-const Dashboard = () => {
+const Dashboard = ({
+  getInsurances,
+  deleteInsurance,
+  insurance: { loading, insurances },
+}) => {
   const navigate = useNavigate();
-  const [insurances, setInsurances] = React.useState([
-    {
-      id: 1,
-      title: "Insurance 1",
-      description: "Insurance 1 description",
-      type: "Insurance 1 type",
-    },
-  ]);
+
+  // const [insurances, setInsurances] = React.useState([
+  //   {
+  //     id: 1,
+  //     title: "Insurance 1",
+  //     description: "Insurance 1 description",
+  //     type: "Insurance 1 type",
+  //   },
+  // ]);
+
+  useEffect(() => {
+    getInsurances();
+    console.log(loading, insurances);
+  }, [getInsurances]);
 
   return (
     <>
@@ -41,36 +55,43 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {insurances.map(({ id, title, type }) => (
-                <tr onClick={() => {}}>
-                  <td>{id}</td>
-                  <td>{title}</td>
-                  <td>{type}</td>
-                  <td>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() =>
-                        navigate(`/dashboard/update-insurance/${id}`)
-                      }
-                    >
-                      Update
-                    </button>{" "}
-                    |{" "}
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => {
-                        if (
-                          window.confirm("Are you sure you want to delete?")
-                        ) {
-                          alert("Insurance removed !");
+              {!loading && insurances ? (
+                insurances.map(({ _id, title, insuranceType }) => (
+                  <tr onClick={() => {}}>
+                    <td>{_id}</td>
+                    <td>{title}</td>
+                    <td>{getInsuranceName(insuranceType)}</td>
+                    <td>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() =>
+                          navigate(`/dashboard/update-insurance/${_id}`)
                         }
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
+                      >
+                        Update
+                      </button>{" "}
+                      |{" "}
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                          if (
+                            window.confirm("Are you sure you want to delete?")
+                          ) {
+                            deleteInsurance(_id);
+                            alert("Insurance removed !");
+                          }
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4">No insurances found</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
           <br />
@@ -83,4 +104,15 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+Dashboard.propTypes = {
+  getInsurances: PropTypes.func.isRequired,
+  deleteInsurance: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  insurance: state.insurance,
+});
+
+export default connect(mapStateToProps, { getInsurances, deleteInsurance })(
+  Dashboard
+);

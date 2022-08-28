@@ -1,18 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { register, login } from "../actions/auth";
+import Alert from "../Components/Alert";
 
-const Register = () => {
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+const Register = ({ register, isAuthenticated }) => {
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    register({ name, email, password });
   };
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
   return (
-    <div className="row" style={{ height: "100vh", overflow: "none" }}>
-      <div className="col-6 shadow" style={{ overflow: "none" }}></div>
+    <div className="row" style={{ height: "95vh" }}>
       <div
-        className="col-6"
+        className="col-12 col-lg-6 shadow"
+        style={{
+          backgroundSize: "cover",
+          background: `url(${require("./../assets/back1.jpg")})`,
+          backgroundPosition: "center",
+        }}
+      ></div>
+      <div
+        className="col-12 col-lg-6"
         style={{
           justifyContent: "center",
           alignItems: "center",
@@ -20,33 +38,52 @@ const Register = () => {
           flexDirection: "column",
         }}
       >
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h1
+            className="text-dark"
+            style={{ fontSize: "60px", transform: "rotate(-5deg)" }}
+          >
+            Insurances
+          </h1>
+        </Link>
+        <br />
         <h1>Register</h1>
         <br />
-        <form
-          className="form"
-          onSubmit={handleSubmit}
-          style={{ width: "50%", overflow: "hidden" }}
-        >
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">
+        <Alert style={{ width: "50%" }} />
+        <form className="form" onSubmit={handleSubmit} style={{ width: "50%" }}>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
+              ab
+            </span>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              aria-label="name"
+            />
+          </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
               @
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               aria-label="email"
             />
           </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="basic-addon1">
               **
             </span>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -69,4 +106,13 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { register })(Register);

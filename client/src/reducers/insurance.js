@@ -2,6 +2,8 @@ import {
   ADD_INSURANCE,
   DELETE_INSURANCE,
   GET_INSURANCE,
+  GET_INSURANCES,
+  INSURANCE_ERROR,
   UPDATE_INSURANCE,
 } from "../actions/types";
 
@@ -35,11 +37,14 @@ export default function auth(state = initialState, action) {
         ),
         loading: false,
       };
-    case ADD_INSURANCE:
+    case ADD_INSURANCE: {
       return {
         ...state,
-        insurances: [payload, ...state.insurances],
+        insurances: state.insurances
+          ? [payload, ...state.insurances]
+          : [payload],
       };
+    }
 
     case UPDATE_INSURANCE:
       return {
@@ -51,6 +56,12 @@ export default function auth(state = initialState, action) {
             return insurance;
           }
         }),
+      };
+    case INSURANCE_ERROR:
+      return {
+        ...state,
+        error: payload,
+        loading: false,
       };
     default:
       return state;

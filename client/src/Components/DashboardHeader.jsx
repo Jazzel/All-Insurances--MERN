@@ -26,7 +26,7 @@ const DashboardHeader = ({ auth: { user }, logout }) => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link" aria-current="page" to="/">
                   Go back to site
@@ -41,7 +41,7 @@ const DashboardHeader = ({ auth: { user }, logout }) => {
               )}
             </ul>
             <span className="navbar-text">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a className="nav-link" onClick={logout} href="#!">
                     Logout

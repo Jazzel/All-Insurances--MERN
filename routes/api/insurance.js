@@ -6,8 +6,8 @@ const Insurance = require("../../models/Insurance");
 
 // @route    GET api/insurances
 // @desc     Get all insurances
-// @access   Private
-router.get("/", auth, async (req, res) => {
+// @access   Public
+router.get("/", async (req, res) => {
   try {
     const insurances = await Insurance.find().sort({ date: -1 });
     return res.json(insurances);
@@ -59,8 +59,8 @@ router.post(
 
 // @route    GET api/insurances/:id
 // @desc     Get insurance by ID
-// @access   Private
-router.get("/:id", auth, async (req, res) => {
+// @access   Public
+router.get("/:id", async (req, res) => {
   try {
     const insurance = await Insurance.findById(req.params.id);
 
