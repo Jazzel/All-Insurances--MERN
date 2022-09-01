@@ -9,21 +9,21 @@ import Footer from "../Components/Footer";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-const UpdateInsurance = ({
-  updateInsurance,
-  getInsurance,
-  insurance: { insurance, loading },
-}) => {
+const UpdateInsurance = ({ updateInsurance, getInsurance, insurance }) => {
+  const [title, setTitle] = React.useState("");
+  const [type, setType] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  let loaded = false;
+  // console.log(insurance !== null && loaded);
+  // if (insurance !== null && loaded) {
+  //   const { title } = insurance;
+  //   setTitle(title);
+  //   console.log(title);
+  //   loaded = true;
+  // }
   const { id } = useParams();
   const history = useNavigate();
-
-  const [title, setTitle] = React.useState(insurance ? insurance.title : "");
-  const [type, setType] = React.useState(
-    insurance ? insurance.insuranceType : ""
-  );
-  const [description, setDescription] = React.useState(
-    insurance ? insurance.description : ""
-  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,12 +44,17 @@ const UpdateInsurance = ({
   };
 
   useEffect(() => {
-    getInsurance(id);
-
-    setTitle(insurance ? insurance.title : "");
-    setDescription(insurance ? insurance.description : "");
-    setType(insurance ? insurance.insuranceType : "");
-  }, [getInsurance, id, insurance]);
+    const fetchInsurance = async () => {
+      const res = await getInsurance(id);
+      if (res) {
+        const { title, insuranceType, description } = res;
+        setTitle(title);
+        setType(insuranceType);
+        setDescription(description);
+      }
+    };
+    fetchInsurance();
+  }, [getInsurance, id]);
 
   return (
     <>
@@ -137,7 +142,7 @@ UpdateInsurance.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  insurance: state.insurance,
+  insurance: state.insurance.insurance,
 });
 
 export default connect(mapStateToProps, { getInsurance, updateInsurance })(

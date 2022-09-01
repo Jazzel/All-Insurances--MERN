@@ -91,6 +91,8 @@ export const getInsurance = (id) => async (dispatch) => {
       type: GET_INSURANCE,
       payload: res.data,
     });
+
+    return res.data;
   } catch (error) {
     dispatch({
       type: INSURANCE_ERROR,
