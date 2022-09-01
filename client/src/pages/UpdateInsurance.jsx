@@ -17,10 +17,12 @@ const UpdateInsurance = ({
   const { id } = useParams();
   const history = useNavigate();
 
-  const [title, setTitle] = React.useState(insurance.title || "");
-  const [type, setType] = React.useState(insurance.insuranceType || "");
+  const [title, setTitle] = React.useState(insurance ? insurance.title : "");
+  const [type, setType] = React.useState(
+    insurance ? insurance.insuranceType : ""
+  );
   const [description, setDescription] = React.useState(
-    insurance.description || ""
+    insurance ? insurance.description : ""
   );
 
   const handleSubmit = async (e) => {
@@ -43,7 +45,11 @@ const UpdateInsurance = ({
 
   useEffect(() => {
     getInsurance(id);
-  }, [getInsurance]);
+
+    setTitle(insurance ? insurance.title : "");
+    setDescription(insurance ? insurance.description : "");
+    setType(insurance ? insurance.insuranceType : "");
+  }, [getInsurance, id, insurance]);
 
   return (
     <>
@@ -115,7 +121,7 @@ const UpdateInsurance = ({
               ></textarea>
             </div>
             <div className="mb-3 w-50">
-              <button className="btn btn-dark w-100">Add insurance</button>
+              <button className="btn btn-dark w-100">Update insurance</button>
             </div>
           </form>
         </div>
