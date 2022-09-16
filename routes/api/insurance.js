@@ -28,6 +28,7 @@ router.post(
       check("title", "Title is required").not().isEmpty(),
       check("description", "Description is required").not().isEmpty(),
       check("insuranceType", "Insurance type is required").not().isEmpty(),
+      check("bank", "bank is required").not().isEmpty(),
     ],
   ],
   async (req, res) => {
@@ -45,6 +46,7 @@ router.post(
         insuranceType: req.body.insuranceType,
         addedBy: user.name,
         user: req.user.id,
+        bank: req.body.bank,
       });
 
       const insurance = await newInsurance.save();
@@ -117,6 +119,7 @@ router.put("/:id", auth, async (req, res) => {
     insurance.title = req.body.title ?? insurance.title;
     insurance.description = req.body.description ?? insurance.description;
     insurance.insuranceType = req.body.insuranceType ?? insurance.insuranceType;
+    insurance.bank = req.body.bank ?? insurance.bank;
 
     await insurance.save();
 

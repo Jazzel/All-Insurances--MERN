@@ -13,6 +13,7 @@ const UpdateInsurance = ({ updateInsurance, getInsurance, insurance }) => {
   const [title, setTitle] = React.useState("");
   const [type, setType] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [bank, setBank] = React.useState("");
 
   let loaded = false;
   // console.log(insurance !== null && loaded);
@@ -32,6 +33,7 @@ const UpdateInsurance = ({ updateInsurance, getInsurance, insurance }) => {
       title,
       insuranceType: type,
       description,
+      bank,
     };
 
     const res = await updateInsurance(id, formData);
@@ -47,10 +49,11 @@ const UpdateInsurance = ({ updateInsurance, getInsurance, insurance }) => {
     const fetchInsurance = async () => {
       const res = await getInsurance(id);
       if (res) {
-        const { title, insuranceType, description } = res;
+        const { title, insuranceType, description, bank } = res;
         setTitle(title);
         setType(insuranceType);
         setDescription(description);
+        setBank(bank);
       }
     };
     fetchInsurance();
@@ -124,6 +127,17 @@ const UpdateInsurance = ({ updateInsurance, getInsurance, insurance }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 rows="5"
               ></textarea>
+            </div>
+
+            <div className="mb-3 w-50">
+              <label className="form-label">Bank</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter bank through which insurance is related"
+                value={bank}
+                onChange={(e) => setBank(e.target.value)}
+              />
             </div>
             <div className="mb-3 w-50">
               <button className="btn btn-dark w-100">Update insurance</button>

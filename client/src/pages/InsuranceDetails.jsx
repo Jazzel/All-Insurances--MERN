@@ -49,6 +49,7 @@ const InsuranceDetails = ({
                 <h3>Type: {insurance.insuranceType}</h3>
                 <br />
                 <p>{insurance.description}</p>
+                <h5>Bank: {insurance.bank}</h5>
               </div>
               <div
                 className="col-12 col-lg-3"

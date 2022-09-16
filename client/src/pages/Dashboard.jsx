@@ -55,7 +55,7 @@ const Dashboard = ({
               </tr>
             </thead>
             <tbody>
-              {!loading && insurances ? (
+              {!loading && insurances.length > 0 ? (
                 insurances.map(({ _id, title, insuranceType }) => (
                   <tr onClick={() => {}}>
                     <td>{_id}</td>
@@ -89,7 +89,9 @@ const Dashboard = ({
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4">No insurances found</td>
+                  <td colSpan="6" className="text-center">
+                    No insurances found
+                  </td>
                 </tr>
               )}
             </tbody>

@@ -23,6 +23,10 @@ const InsuranceSchema = new Schema(
       type: String,
       required: true,
     },
+    bank: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

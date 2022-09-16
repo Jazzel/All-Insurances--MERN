@@ -13,6 +13,7 @@ const AddInsurance = ({ addInsurance }) => {
   const [title, setTitle] = React.useState("");
   const [type, setType] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [bank, setBank] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ const AddInsurance = ({ addInsurance }) => {
       title,
       insuranceType: type,
       description,
+      bank,
     };
 
     const res = await addInsurance(formData);
@@ -99,6 +101,16 @@ const AddInsurance = ({ addInsurance }) => {
                 onChange={(e) => setDescription(e.target.value)}
                 rows="5"
               ></textarea>
+            </div>
+            <div className="mb-3 w-50">
+              <label className="form-label">Bank</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter bank through which insurance is related"
+                value={bank}
+                onChange={(e) => setBank(e.target.value)}
+              />
             </div>
             <div className="mb-3 w-50">
               <button className="btn btn-dark w-100">Add insurance</button>

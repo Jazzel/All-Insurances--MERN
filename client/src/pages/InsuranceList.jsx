@@ -48,12 +48,13 @@ const InsuranceList = ({
           .length > 0 ? (
           insurances
             .filter((insurance) => insurance.insuranceType === type)
-            .map(({ _id, title, description, insuranceType }) => (
+            .map(({ _id, title, description, insuranceType, bank }) => (
               <InsuranceCard
                 id={_id}
                 title={title}
                 description={description}
                 type={insuranceType}
+                bank={bank}
               />
             ))
         ) : (

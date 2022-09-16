@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { insuranceTypes } from "../App";
 
-const InsuranceCard = ({ id, title, description, type }) => {
+const InsuranceCard = ({ id, title, description, type, bank }) => {
   const history = useNavigate();
   const image = insuranceTypes.find((item) => item.value === type).image;
 
@@ -22,6 +22,7 @@ const InsuranceCard = ({ id, title, description, type }) => {
                 {title} - {type}
               </h4>
               <p className="card-text">{description}</p>
+              <h5>Bank: {bank}</h5>
             </div>
             <div className="col-12 col-lg-2">
               <img src={image} alt={title} />
